@@ -1,0 +1,19 @@
+name : publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - run: npm install
+      - run: node ./server/index.js
+      - run: npm run start -y
+      - run: npm run build
